@@ -1,4 +1,9 @@
-
+/* Sección de variables */
+:root {
+    --color-primario: #dd0bb0c4; /* Lila */
+    --color-secundario: #05055a; /* Azul */
+    --fuente-base: sans-serif;
+  }
 
 
 body {
@@ -12,12 +17,18 @@ body {
 }
 
 #quiz-container {
-    background-color: #fff;
+    background-color: var(--color-primario);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     padding: 20px;
     width: 300px;
     text-align: center;
+}
+
+#question {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .option {
@@ -31,5 +42,6 @@ body {
 }
 
 .option:hover {
-    background-color: #e0e0e0;
+    background-color: var(--color-secundario);
+    color: #fff;
 }
