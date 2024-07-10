@@ -159,6 +159,8 @@ function checkAnswer(selected) {
         } else {
             clearInterval(timerInterval);
             alert(`¡Juego terminado! Tu puntaje final es: ${score} y el tiempo total es: ${formatTime(time)}.`);
+            loadQuestion();
+            startTimer();
         }
     }, 2000); // Espera 5 segundos antes de cargar la siguiente pregunta
 }
