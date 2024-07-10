@@ -1,19 +1,42 @@
 /* Sección de variables */
 :root {
     --color-primario: #dd0bb0c4; /* Lila */
-    --color-secundario: #05055a; /* Azul */
+    --color-secundario: #1680e4; /* Azul */
+    --verde: #1cd60b;
+    --rojo: #f12a07d8;
     --fuente-base: sans-serif;
   }
 
 
 body {
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    background-image: url(/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.principal-container {
+    width: 100%;
+    height: 100%;
+    background-color: #dddddd96;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f4;
+}
+
+.title-container {
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    text-shadow: 3px 4px 2px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 2%;
+    background-color: #dddddd88;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #quiz-container {
@@ -21,7 +44,7 @@ body {
     border-radius: 8px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     padding: 20px;
-    width: 300px;
+    width: 500px;
     text-align: center;
 }
 
@@ -41,7 +64,77 @@ body {
     transition: background-color 0.3s;
 }
 
-.option:hover {
-    background-color: var(--color-secundario);
+.correcto {
+    background-color: var(--verde);
     color: #fff;
+    font-weight: bold;
+    transform: scale(1.1);
+    transition: 0.1s ease-in;
+}
+
+.incorrecto {
+    background-color: var(--rojo);
+    color: #fff;
+    font-weight: bold;
+}
+
+.style-cuar {
+    width: 100px;
+    height: 50px;
+    border: 1px solid var(--color-primario);
+    border-radius: 5px;
+    border-width: 5px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.score {
+    position: absolute;
+    left: 75%;
+    top: 10%;
+}
+
+.time {
+    position: absolute;
+    left: 75%;
+    top: 25%;
+}
+
+/*ESTILOS PARA DISPOSITIVOS MOVILES*/
+
+@media (max-width: 768px) {
+
+    .title-container {
+        font-size: 1.3em;
+    }
+
+    .style-cuar {
+        width: 15%;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .score {
+        left: 7%;
+        top: 25%;
+    }
+
+    .time {
+        left: 70%;
+    }
+
+    #quiz-container {
+        width: 85%;
+        margin-top: 200px;
+    }
+
+    .option {
+        width: 94%;
+        height: 100%;
+    }
+
 }

@@ -12,7 +12,7 @@ const questions = [
     {
         question: "¿Cuál es la capital de Francia?",
         options: ["Berlín", "Madrid", "París", "Roma"],
-        answer: 3
+        answer: 2
     },
     {
         question: "¿Qué animal es conocido como el 'rey de la selva'?",
@@ -57,7 +57,7 @@ const questions = [
     {
         question: "¿Cuál es la capital de Australia?",
         options: ["Sídney", "Melbourne", "Canberra", "Brisbane"],
-        answer: 2
+        answer: 0
     },
     {
         question: "¿Qué instrumento mide los terremotos?",
@@ -104,6 +104,22 @@ const questions = [
 
 let currentQuestion = 0;
 let score = 0;
+let time = 0;
+let timerInterval;
+
+function startTimer() {
+    timerInterval = setInterval(() => {
+        time++;
+        document.getElementById('time').textContent = formatTime(time);
+    }, 1000);
+}
+
+function formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
 
 function loadQuestion() {
     const questionElement = document.getElementById('question');
@@ -112,23 +128,42 @@ function loadQuestion() {
     questionElement.textContent = current.question;
     options.forEach((option, index) => {
         option.textContent = current.options[index];
+        option.classList.remove('correcto', 'incorrecto');
+        option.setAttribute('onclick', `checkAnswer(${index})`);
     });
 }
 
 function checkAnswer(selected) {
-    if (selected === questions[currentQuestion].answer) {
-        alert("¡Correcto!");
+    const options = document.querySelectorAll('.option');
+    const correctAnswer = questions[currentQuestion].answer;
+
+    if (selected === correctAnswer) {
+        options[selected].classList.add('correcto');
         score += 10;
     } else {
-        alert("Incorrecto.");
+        options[selected].classList.add('incorrecto');
+        options[correctAnswer].classList.add('correcto');
         score -= 5;
     }
+
+    document.getElementById('score').textContent = score;
+
+    options.forEach(option => {
+        option.onclick = null; // Desactivar clic después de seleccionar una respuesta
+    });
+
     currentQuestion++;
-    if (currentQuestion < questions.length) {
-        loadQuestion();
-    } else {
-        alert("¡Juego terminado!");
-    }
+    setTimeout(() => {
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            clearInterval(timerInterval);
+            alert(`¡Juego terminado! Tu puntaje final es: ${score} y el tiempo total es: ${formatTime(time)}.`);
+        }
+    }, 2000); // Espera 5 segundos antes de cargar la siguiente pregunta
 }
 
-document.addEventListener('DOMContentLoaded', loadQuestion);
+document.addEventListener('DOMContentLoaded', () => {
+    loadQuestion();
+    startTimer();
+});
