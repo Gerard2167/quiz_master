@@ -1,5 +1,0 @@
-Desde la terminal de VSC:
-
-git add [Se coloca el archivo o archivos con sus respectivas extesiones]
-git commit -m "Mensaje de actualización que se subirá"
-git push origin master
